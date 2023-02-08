@@ -1,12 +1,21 @@
-<div id="<%= dom_id category %>">
-  <p>
-    <strong>Name:</strong>
-    <%= category.name %>
-  </p>
+<h1 class="text-center my-4"><%= category.name %></h1>
 
-  <p>
-    <strong>Description:</strong>
-    <%= category.description %>
-  </p>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Назва</th>
+      <th>Короткий опис</th>
+    </tr>
+  </thead>
+  <tbody>
+    <td><%= category.name %></td>
+    <td><%= category.description %></td>
+  </tbody>
+</table>
 
+<div class="col">
+  <%= link_to "Всі операції", categories_path, class: "btn btn-success" %>
+  <%= link_to "Редагувати", edit_category_path(category), class: "btn btn-info" %>
+  <%= button_to "Видалити", category, method: :delete, class: "btn btn-danger" %>
 </div>
+

@@ -1,9 +1,5 @@
-<h1>New operation</h1>
+<h1 class="text-center py-1">Нова транзакція</h1>
 
-<%= render "form", operation: @operation %>
-
-<br>
-
-<div>
-  <%= link_to "Back to operations", operations_path %>
+<div class="container px-4" style="background: rgb(246, 243, 243); margin-top: 15px; border-radius: 10px">
+  <%= render "form", operation: @operation %>
 </div>

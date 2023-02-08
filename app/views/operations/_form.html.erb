@@ -11,27 +11,70 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :amount, style: "display: block" %>
-    <%= form.text_field :amount %>
+<div class="row g-3 align-items-center py-2">
+  <div class="col-2 text-end">
+    <label for="operation_category_id" class="form-label">Назва Категорії</label>
+  </div>
+  <div class="col-3">
+  <select name="operation[category_id]" id="operation_category_id" class="form-select">
+    <%= Category.all.each do | categor | %>
+    <option value=<%= categor.id %>>
+    <%= categor.name %>
+    </option>
+    <% end %>
+  </select>
+</div>
+
+<div class="row g-3 align-items-center">
+  <div class="col-2 text-end">
+  <%= form.label :otype, "Тип операції", class:"form-label" %>
+  </div>
+  <div class="col-3">
+    <select name="operation[otype]" id="otype", class="form-select">
+      <%= Operation.otypes.keys.each do |key| %>
+      <option><%= key %></option>
+      <% end %>
+    </select>
   </div>
 
-  <div>
-    <%= form.label :odate, style: "display: block" %>
-    <%= form.datetime_field :odate %>
+  <div class="row g-3 align-items-center">
+    <div class="col-2 text-end">
+      <%= form.label :amount, "Сума", class: "form-label" %>
+    </div>
+    <div class="col-2">
+      <%= form.text_field :amount, class: "form-control" %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
+  <div class="row g-3 align-items-center">
+    <div class="col-2 text-end">
+      <%= form.label :description, "Короткий Опис", class: "form-label" %>
+    </div>
+    <div class="col-6">
+      <%= form.text_field :description, class: "form-control" %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :category_id, style: "display: block" %>
-    <%= form.text_field :category_id %>
+  <div class="row g-3 align-items-center">
+    <div class="col-2 text-end">
+      <%= form.label :odate, "Дата YYYY-MM-DD", class: "form-label" %>
+    </div>
+    <div class="col-3">
+      <%= form.date_field :odate, class: "form-control" %>
+    </div>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="row g-3 align-items-center">
+    <div class="col-1 offset-2" style="margin-bottom:10px">
+      <%= form.submit "Зберегти", class: "btn btn-primary bg-gradient" %>
+    </div>
+    <div class="col-2">
+     <button type="reset" class="btn btn-primary bg-gradient mx-3" style="margin-bottom:10px">
+     Очистити
+     </button>
+    </div>
   </div>
-<% end %>
+
+    <% end %>
+  </div>
+</div>

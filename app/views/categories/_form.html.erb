@@ -11,17 +11,36 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+<div class="row g-3 align-items-center py-2">
+
+  <div class="row g-3 align-items-center">
+    <div class="col-2 text-end">
+      <%= form.label :name, "Назва категорії", class: "form-label" %>
+    </div>
+    <div class="col-3">
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
+  <div class="row g-3 align-items-center">
+    <div class="col-2 text-end">
+      <%= form.label :description, "Короткий опис", class: "form-label" %>
+    </div>
+    <div class="col-6">
+      <%= form.text_field :description, class: "form-control" %>
+    </div>
   </div>
 
-  <div>
-    <%= form.submit %>
+   <div class="row g-3 align-items-center">
+    <div class="col-1 offset-2" style="margin-bottom:10px">
+      <%= form.submit "Зберегти", class: "btn btn-primary bg-gradient" %>
+    </div>
+    <div class="col-2">
+     <button type="reset" class="btn btn-primary bg-gradient mx-3" style="margin-bottom:10px">
+     Очистити
+     </button>
+    </div>
   </div>
+
+</div>
 <% end %>

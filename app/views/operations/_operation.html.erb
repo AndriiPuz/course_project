@@ -1,22 +1,27 @@
-<div id="<%= dom_id operation %>">
-  <p>
-    <strong>Amount:</strong>
-    <%= operation.amount %>
-  </p>
+<h1 class="text-center my-4"><%= operation.description %></h1>
 
-  <p>
-    <strong>Odate:</strong>
-    <%= operation.odate %>
-  </p>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Категорія</th>
+      <th>Опис</th>
+      <th>Тип операції</th>
+      <th>Сума</th>
+      <th>Дата</th>
+    </tr>
+  </thead>
+  <tbody>
+    <td><%= operation.category.name %></td>
+    <td><%= operation.description %></td>
+    <td><%= operation.otype %></td>
+    <td><%= operation.amount %></td>
+    <td><%= operation.odate %></td>
+  </tbody>
+</table>
 
-  <p>
-    <strong>Description:</strong>
-    <%= operation.description %>
-  </p>
-
-  <p>
-    <strong>Category:</strong>
-    <%= operation.category_id %>
-  </p>
-
+<div class="col">
+  <%= link_to "Всі операції", operations_path, class: "btn btn-success" %>
+  <%= link_to "Редагувати", edit_operation_path(operation), class: "btn btn-info" %>
+  <%= button_to "Видалити", operation, method: :delete, class: "btn btn-danger" %>
 </div>
+
