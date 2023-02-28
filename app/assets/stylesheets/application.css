@@ -13,8 +13,11 @@
  *= require_tree .
  *= require_self
  */
+ .footer a:hover{
+    color:black;
+}
 #full-color {
-    background-color: bisque;
+    background-color: rgb(138, 137, 137);
 }
 
  body {
@@ -29,8 +32,8 @@
  }
 
  .footer{
-    background: bisque;
-    padding:15px 0px;
+    background: rgb(138, 137, 137);
+    padding:10px 0px;
     font-family: 'Play', sans-serif;
     text-align:center;
 
@@ -44,18 +47,13 @@
 .icon-row {
     display: flex;
     justify-content: center;
-    padding-bottom: 20px;
+    padding-bottom: 15px;
 }
 .footer a{
     text-decoration:none;
-    color:gray;
+    color:white;
     transition:0.5s;
 }
-
-.footer a:hover{
-    color:#fff;
-}
-
 .footer a i{
     font-size:2em;
     margin:0% 1%;
@@ -70,3 +68,66 @@
 .button_to {
     display: inline-block !important;
    }
+
+.title_name {
+    text-decoration: none;
+    color: rgb(17, 17, 17);
+    margin-right: 10px;
+}
+
+.all_sum {
+    background-color: rgb(137, 197, 145);
+}
+
+.description_category {
+    text-decoration: none;
+    color: rgb(23, 123, 185);
+}
+.description_category:hover {
+    color:rgb(59, 0, 208);
+}
+
+.description_operation {
+    text-decoration: none;
+    color: rgb(23, 123, 185);
+}
+.description_operation:hover {
+    color:rgb(59, 0, 208);
+}
+
+.title_name:hover {
+    color:rgb(183, 196, 207);
+}
+
+.icon_pencil {
+    color:rgb(17, 17, 17);
+    font-size: 17px;
+}
+.link_pencil {
+    text-decoration: none;
+    margin-left: 20px;
+}
+.icon_square {
+    font-size: 17px;
+
+}
+.button_square {
+    border: none;
+    outline: none;
+    background: transparent;
+    margin-left: 10px;
+}
+.search_category {
+    margin-top: 10px;
+    border-radius: 15px;
+    text-align: center;
+}
+.submit_search_category {
+    border-radius: 15px;
+}
+
+.search_operations {
+    margin-top: 10px;
+    border-radius: 15px;
+    text-align: center;
+}

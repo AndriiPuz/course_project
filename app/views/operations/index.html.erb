@@ -3,8 +3,11 @@
 <h1 class="text-center">Транзакції</h1>
 
 
-<div class="container" style="background: rgb(246, 243, 243); margin-top: 15px; border-radius: 10px">
-  <table class= "table table-striped table-bordered mt-4">
+<div class="container" style="background: rgb(246, 243, 243); margin-top: 10px; border-radius: 10px">
+<%= form_tag(operations_path, :method => 'get' ) do %>
+  <%= select_tag :search, options_for_select(Category.all.map{ |c| [c.name]}, params[:search]), :onchange => 'this.form.submit()', :include_blank => "Всі категорії", class:"search_operations" %>
+  <% end %>
+  <table class= "table table-striped table-bordered mt-3">
     <thead>
       <tr>
         <th>#</th>
@@ -26,23 +29,23 @@
             <%= operation.category.name %>
           </td>
           <td>
-            <%= operation.otype %>
+            <%= operation.otype == "income" ? "Дохід" : "Витрата" %>
           </td>
           <td>
             <%= operation.amount %>
           </td>
           <td>
-            <%= operation.odate %>
+            <%= operation.odate.strftime("%Y-%m-%d") %>
           </td>
           <td>
-            <%= link_to operation.description, operation %>
+            <%= link_to operation.description, operation, class:"description_operation"%>
           </td>
           <td>
-            <%= link_to edit_operation_path(operation) do %>
-              <i class="bi bi-pencil-square"></i>
+            <%= link_to edit_operation_path(operation), class:"link_pencil" do %>
+              <i class="bi bi-pencil-square icon_pencil"></i>
             <% end %>
-            <%= button_to operation, method: :delete do %>
-              <i class="bi bi-x-square"></i>
+            <%= button_to operation, class:"button_square", method: :delete do %>
+              <i class="bi bi-x-square icon_square"></i>
             <% end %>
           </td>
         </tr>
@@ -53,5 +56,6 @@
 
 <div class="ms-5 mt-3">
     <%= link_to "Додати нову транзакцію", new_operation_path, class: "btn btn-primary ms-3" %>
+    <%= paginate @operations %>
 </div>
 

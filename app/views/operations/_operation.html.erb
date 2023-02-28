@@ -13,7 +13,7 @@
   <tbody>
     <td><%= operation.category.name %></td>
     <td><%= operation.description %></td>
-    <td><%= operation.otype %></td>
+    <td><%= operation.otype == "income" ? "Дохід" : "Витрата" %></td>
     <td><%= operation.amount %></td>
     <td><%= operation.odate %></td>
   </tbody>

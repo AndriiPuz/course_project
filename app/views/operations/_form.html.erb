@@ -32,7 +32,9 @@
   <div class="col-3">
     <select name="operation[otype]" id="otype", class="form-select">
       <%= Operation.otypes.keys.each do |key| %>
-      <option><%= key %></option>
+        <option value=<%= key %>>
+          <%= key == "income" ? "Дохід" : "Витрата"%>
+        </option>
       <% end %>
     </select>
   </div>
