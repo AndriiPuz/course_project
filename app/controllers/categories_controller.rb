@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories or /categories.json
   def index
-    @categories = Category.search(params[:search])
+    @categories = Category.search(params[:search]).page(params[:page])
   end
 
   # GET /categories/1 or /categories/1.json

@@ -1,0 +1,58 @@
+
+<div>
+  <h1 class="text-center">Звіт за період: <%= @date_title.values.join(' - ') %></h1>
+  <h2 class="text-center"><%= @otype.values.join("") == "income" ? "Дохід" : "Витрата" %></h2>
+</div>
+<div class="row d-flex" style="--bs-gutter-x: unset !important;">
+  <div class="col">
+    <canvas id="myChart" width="400" height="350"></canvas>
+  </div>
+    <div class="col-6" style="background: rgb(246, 243, 243); padding-top: 10px; padding-left: 10px; padding-right: 10px; margin-right:15px; height:100%; margin-top:10px;">
+  <table style="background: rgb(246, 243, 243);"  class="table table-bordered table-striped ">
+    <thead>
+      <tr>
+      <th class="text-center">Категорія</th>
+      <th class="text-center">Сума</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @category_report.each do |names| %>
+          <tr>
+          <td><%= Category.find_by(id: names).name %></td>
+          <td><%= names[1] %></td>
+        </tr>
+        <% end %>
+    </tbody>
+    <tfoot class="all_sum">
+    <tr>
+      <td colspan="2">Всього: <%= (@category_dates).sum %> грн.</td>
+    </tr>
+    </tfoot>
+  </table>
+  </div>
+</div>
+<div>
+<script>
+  const pie_chart = document.getElementById('myChart');
+  const data = {
+    labels: <%= raw @category_id %>,
+    datasets: [{
+      label: 'Витрачених коштів',
+      data: <%= @category_dates %>,
+      backgroundColor: ["#ccaca7", "#19ff1b", "#a5aca7", "#a5ac3d", "#89ac3d","#19ac3d", "#195e3d", "#195e1b", "#e7ff1b", "#e7ffbc", "#e7ffff", "#20ffff", "#c6ffff", "#c6d9ff", "#c6d9a6", "#c655a6", "#c6553c"],
+      hoverOffset: 4
+    }]
+  };
+
+const config = {
+  type: 'pie',
+  data: data,
+  options: {
+    responsive: false
+  }
+};
+const myChart = new Chart(pie_chart, config);
+
+
+</script>
+</div>

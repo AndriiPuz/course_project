@@ -1,0 +1,39 @@
+<header>
+<nav class="navbar navbar-expand-lg" id="full-color">
+  <div class="container-fluid">
+    <%= link_to "FINANCE MANAGER", main_path, class:"title_name"%>
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
+            Категорії
+          </a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Всі категорії", categories_path, class:"dropdown-item" %></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><%= link_to "Створити нову категорію", new_category_path, class:"dropdown-item" %></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
+            Операції
+          </a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Всі операції", operations_path, class:"dropdown-item" %></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><%= link_to "Створити нову операцію", new_operation_path, class:"dropdown-item" %></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
+            Звітність
+          </a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Згенерувати звіт", reports_path, class:"dropdown-item" %></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+</header>
