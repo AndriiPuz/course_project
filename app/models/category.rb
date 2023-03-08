@@ -13,4 +13,5 @@ class Category < ApplicationRecord
             all
         end
     end
+
 end

@@ -19,4 +19,5 @@ class Operation < ApplicationRecord
         all
     end
   end
+
 end

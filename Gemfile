@@ -67,6 +67,11 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+  gem "dockerfile-rails"
+end
+
+group :production do
+  gem 'pg'
 end
 
 group :test do
@@ -76,3 +81,6 @@ group :test do
   gem "webdrivers"
   gem 'shoulda-matchers'
 end
+
+
+gem "redis", "~> 5.0"
