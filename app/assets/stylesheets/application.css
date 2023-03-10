@@ -19,6 +19,9 @@
 #full-color {
     background-color: rgb(138, 137, 137);
 }
+.navbar-collapse.collapse.show {
+    color: black;
+}
 
  body {
     min-height: 100hv;
