@@ -1,3 +1,4 @@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <div>
   <h1 class="text-center">Звіт за період: <%= @date_title.values.join(' - ') %></h1>
@@ -33,6 +34,7 @@
 </div>
 <div>
 <script>
+{
   const pie_chart = document.getElementById('myChart');
   const data = {
     labels: <%= raw @category_id %>,
@@ -53,6 +55,6 @@ const config = {
 };
 const myChart = new Chart(pie_chart, config);
 
-
+}
 </script>
 </div>
