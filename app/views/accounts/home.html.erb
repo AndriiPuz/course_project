@@ -1,0 +1,13 @@
+<h1>Admin Panel</h1>
+<h2>Users</h2>
+<ul>
+  <% @accounts.each do |user| %>
+    <li>
+      <%= user.email %>
+      
+    </li>
+  <% end %>
+</ul>
+
+<p>User deleted successfully.</p>
+<%= link_to 'Back to User List', accounts_home_path %>

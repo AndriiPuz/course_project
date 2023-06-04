@@ -4,6 +4,10 @@ class RodauthApp < Rodauth::Rails::App
 
   # secondary configuration
   # configure RodauthAdmin, :admin
+  rodauth do
+    # Налаштування login_form_required
+    login_form_required { !current_account }
+  end
 
   route do |r|
     rodauth.load_memory # autologin remembered users
@@ -28,6 +32,12 @@ class RodauthApp < Rodauth::Rails::App
       rodauth.require_authentication
     end
     if r.path.start_with?("/reports")
+      rodauth.require_authentication
+    end
+    if r.path.start_with?("/accounts/home")
+      rodauth.require_authentication
+    end
+    if r.path.start_with?("/main")
       rodauth.require_authentication
     end
     if rodauth.uses_two_factor_authentication?

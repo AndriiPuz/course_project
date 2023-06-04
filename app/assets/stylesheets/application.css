@@ -135,3 +135,8 @@
 .carousel-inner img {
     margin: auto;
   }
+
+.qr-code-container svg {
+    width: 400px;
+    height: 400px;
+  }

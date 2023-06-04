@@ -21,6 +21,8 @@ class RodauthMain < Rodauth::Rails::Auth
         Profile.find_by!(account_id: account_id).destroy
       end
 
+      
+
     # See the Rodauth documentation for the list of available config options:
     # http://rodauth.jeremyevans.net/documentation.html
 
@@ -168,6 +170,7 @@ class RodauthMain < Rodauth::Rails::Auth
 
     # Redirect to wherever login redirects to after account verification.
     verify_account_redirect { login_redirect }
+    already_logged_in { redirect login_redirect }
 
     # Redirect to login page after password reset.
     reset_password_redirect { login_path }

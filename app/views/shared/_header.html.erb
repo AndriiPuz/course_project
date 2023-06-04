@@ -40,7 +40,6 @@
           </button>
         <div class="dropdown-menu dropdown-menu-end">
           <%= link_to "Change password", rodauth.change_password_path, class: "dropdown-item" %>
-          <%= link_to "Change email", rodauth.change_login_path, class: "dropdown-item" %>
           <%= link_to "Manage MFA", rodauth.two_factor_manage_path, class: "dropdown-item" %>
           <div class="dropdown-divider"></div>
           <%= link_to "Close account", rodauth.close_account_path, class: "dropdown-item text-danger" %>
@@ -50,8 +49,15 @@
     </nav>
     <% else %>
   <div>
-    <%= link_to "Sign in", rodauth.login_path, class: "btn btn-outline-primary" %>
-    <%= link_to "Sign up", rodauth.create_account_path, class: "btn btn-success" %>
+    <nav class="navbar navbar-expand-lg d-flex justify-content-between" id="full-color">
+    <div>
+      <%= link_to "FINANCE MANAGER", main_path, class:"title_name"%>
+    </div>
+    <div>
+      <%= link_to "Sign in", rodauth.login_path, class: "btn btn-outline-primary" %>
+      <%= link_to "Sign up", rodauth.create_account_path, class: "btn btn-success" %>
+    </div>
+    </nav>
   </div>
   <% end %>
 </header>

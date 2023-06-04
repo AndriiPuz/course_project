@@ -4,4 +4,5 @@ class Account < ApplicationRecord
   has_many :categories, dependent: :destroy
   has_many :operations
   has_one :profile
+  enum role: [:user, :admin]
 end

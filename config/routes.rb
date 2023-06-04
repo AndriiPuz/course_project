@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  root "main#index"
+  get 'accounts/home'
+  root 'rodauth#login'
+  # root "main#index"
   get 'reports', to: 'reports#index'
   get 'reports_by_category', to: 'reports#report_by_category'
   get 'reports_by_dates', to: 'reports#report_by_dates'
