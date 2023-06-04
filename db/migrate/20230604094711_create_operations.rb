@@ -5,6 +5,7 @@ class CreateOperations < ActiveRecord::Migration[7.0]
       t.datetime :odate
       t.string :description
       t.references :category, null: false, foreign_key: true
+      t.references :account, null: false, foreign_key: true
 
       t.timestamps
     end

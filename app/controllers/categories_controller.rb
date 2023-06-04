@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories or /categories.json
   def index
-    @categories = Category.search(params[:search]).page(params[:page])
+    @categories = current_account.categories.search(params[:search]).page(params[:page])
   end
 
   # GET /categories/1 or /categories/1.json
@@ -21,7 +21,7 @@ class CategoriesController < ApplicationController
 
   # POST /categories or /categories.json
   def create
-    @category = Category.new(category_params)
+    @category = current_account.categories.build(category_params)
 
     respond_to do |format|
       if @category.save
@@ -60,7 +60,7 @@ class CategoriesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_category
-      @category = Category.find(params[:id])
+      @category = current_account.categories.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

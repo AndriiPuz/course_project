@@ -1,16 +1,17 @@
 class Category < ApplicationRecord
-    has_many :operations, :dependent => :destroy
+  belongs_to :account
+  has_many :operations, :dependent => :destroy
 
-    paginates_per 5
+  paginates_per 5
 
-    validates :name, uniqueness: true, presence: true
-    validates :description, presence: true
+  validates :name, uniqueness: true, presence: true
+  validates :description, presence: true
 
-    def self.search(search)
-        if search
-            where(["name LIKE ? ", "%#{search}%"])
-        else
-            all
-        end
-    end
+  def self.search(search)
+      if search
+          where(["name LIKE ? ", "%#{search}%"])
+      else
+          all
+      end
+  end
 end

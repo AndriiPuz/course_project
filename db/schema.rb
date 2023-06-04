@@ -10,12 +10,50 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_03_194339) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_04_114600) do
+  create_table "account_login_change_keys", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "login", null: false
+    t.datetime "deadline", null: false
+  end
+
+  create_table "account_otp_keys", force: :cascade do |t|
+    t.string "key", null: false
+    t.integer "num_failures", default: 0, null: false
+    t.datetime "last_use", default: -> { "CURRENT_TIMESTAMP" }, null: false
+  end
+
+  create_table "account_password_reset_keys", force: :cascade do |t|
+    t.string "key", null: false
+    t.datetime "deadline", null: false
+    t.datetime "email_last_sent", default: -> { "CURRENT_TIMESTAMP" }, null: false
+  end
+
+  create_table "account_remember_keys", force: :cascade do |t|
+    t.string "key", null: false
+    t.datetime "deadline", null: false
+  end
+
+  create_table "account_verification_keys", force: :cascade do |t|
+    t.string "key", null: false
+    t.datetime "requested_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "email_last_sent", default: -> { "CURRENT_TIMESTAMP" }, null: false
+  end
+
+  create_table "accounts", force: :cascade do |t|
+    t.integer "status", default: 1, null: false
+    t.string "email", null: false
+    t.string "password_hash"
+    t.index ["email"], name: "index_accounts_on_email", unique: true, where: "status IN (1, 2)"
+  end
+
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.string "description"
+    t.integer "account_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_categories_on_account_id"
   end
 
   create_table "operations", force: :cascade do |t|
@@ -23,11 +61,29 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_03_194339) do
     t.datetime "odate"
     t.string "description"
     t.integer "category_id", null: false
+    t.integer "account_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "otype", default: 0
+    t.index ["account_id"], name: "index_operations_on_account_id"
     t.index ["category_id"], name: "index_operations_on_category_id"
   end
 
+  create_table "profiles", force: :cascade do |t|
+    t.integer "account_id", null: false
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_profiles_on_account_id"
+  end
+
+  add_foreign_key "account_login_change_keys", "accounts", column: "id"
+  add_foreign_key "account_otp_keys", "accounts", column: "id"
+  add_foreign_key "account_password_reset_keys", "accounts", column: "id"
+  add_foreign_key "account_remember_keys", "accounts", column: "id"
+  add_foreign_key "account_verification_keys", "accounts", column: "id"
+  add_foreign_key "categories", "accounts"
+  add_foreign_key "operations", "accounts"
   add_foreign_key "operations", "categories"
+  add_foreign_key "profiles", "accounts"
 end

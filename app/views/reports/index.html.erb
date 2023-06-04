@@ -27,7 +27,7 @@
                 </div>
                 <div class="col-3">
                     <select name="operation[otype]" id="otype", class="form-select">
-                        <% Operation.otypes.keys.each do |key| %>
+                        <% current_account.operations.otypes.keys.each do |key| %>
                             <option value=<%= key %>>
                                 <%= key == "income" ? "Дохід" : "Витрата"%>
                             </option>
@@ -41,7 +41,7 @@
                 </div>
                 <div class="col-3">
                     <select name="operation[category_id]" id="operation_category_id" class="form-select">
-                        <% Category.all.each do | categor | %>
+                        <% current_account.categories.all.each do | categor | %>
                             <option value=<%= categor.id %>>
                                 <%= categor.name %>
                             </option>

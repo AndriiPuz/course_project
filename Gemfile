@@ -76,3 +76,8 @@ group :test do
   gem "webdrivers"
   gem 'shoulda-matchers'
 end
+
+gem "rodauth-rails", "~> 1.9"
+
+gem "rotp", "~> 6.2"
+gem "rqrcode", "~> 2.2"

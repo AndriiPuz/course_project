@@ -1,39 +1,57 @@
 <header>
-<nav class="navbar navbar-expand-lg" id="full-color">
-  <div class="container-fluid">
-    <%= link_to "FINANCE MANAGER", main_path, class:"title_name"%>
-    <div class="collapse navbar-collapse" id="navbarScroll">
-      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
-            Категорії
-          </a>
-          <ul class="dropdown-menu">
-            <li><%= link_to "Всі категорії", categories_path, class:"dropdown-item" %></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><%= link_to "Створити нову категорію", new_category_path, class:"dropdown-item" %></li>
+  <% if rodauth.logged_in? %>
+    <nav class="navbar navbar-expand-lg" id="full-color">
+      <div class="container-fluid">
+        <%= link_to "FINANCE MANAGER", main_path, class:"title_name"%>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+          <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
+                Категорії
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Всі категорії", categories_path, class:"dropdown-item" %></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><%= link_to "Створити нову категорію", new_category_path, class:"dropdown-item" %></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
+                Операції
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Всі операції", operations_path, class:"dropdown-item" %></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><%= link_to "Створити нову операцію", new_operation_path, class:"dropdown-item" %></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
+                Звітність
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Згенерувати звіт", reports_path, class:"dropdown-item" %></li>
+              </ul>
+            </li>
           </ul>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
-            Операції
-          </a>
-          <ul class="dropdown-menu">
-            <li><%= link_to "Всі операції", operations_path, class:"dropdown-item" %></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><%= link_to "Створити нову операцію", new_operation_path, class:"dropdown-item" %></li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
-            Звітність
-          </a>
-          <ul class="dropdown-menu">
-            <li><%= link_to "Згенерувати звіт", reports_path, class:"dropdown-item" %></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
+        </div>
+          <button class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" type="button">
+            <%= current_account.email %>
+          </button>
+        <div class="dropdown-menu dropdown-menu-end">
+          <%= link_to "Change password", rodauth.change_password_path, class: "dropdown-item" %>
+          <%= link_to "Change email", rodauth.change_login_path, class: "dropdown-item" %>
+          <%= link_to "Manage MFA", rodauth.two_factor_manage_path, class: "dropdown-item" %>
+          <div class="dropdown-divider"></div>
+          <%= link_to "Close account", rodauth.close_account_path, class: "dropdown-item text-danger" %>
+          <%= link_to "Sign out", rodauth.logout_path, data: { turbo_method: :post }, class: "dropdown-item" %>
+        </div>
+      </div>
+    </nav>
+    <% else %>
+  <div>
+    <%= link_to "Sign in", rodauth.login_path, class: "btn btn-outline-primary" %>
+    <%= link_to "Sign up", rodauth.create_account_path, class: "btn btn-success" %>
   </div>
-</nav>
+  <% end %>
 </header>

@@ -3,7 +3,7 @@ class OperationsController < ApplicationController
 
   # GET /operations or /operations.json
   def index
-    @operations = Operation.search(params[:search]).page(params[:page])
+    @operations = current_account.operations.search(params[:search]).page(params[:page])
   end
 
   # GET /operations/1 or /operations/1.json
@@ -21,7 +21,7 @@ class OperationsController < ApplicationController
 
   # POST /operations or /operations.json
   def create
-    @operation = Operation.new(operation_params)
+    @operation = current_account.operations.build(operation_params)
 
     respond_to do |format|
       if @operation.save
@@ -60,7 +60,7 @@ class OperationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_operation
-      @operation = Operation.find(params[:id])
+      @operation = current_account.operations.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

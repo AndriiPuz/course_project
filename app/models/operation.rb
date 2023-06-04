@@ -1,5 +1,6 @@
 class Operation < ApplicationRecord
   belongs_to :category
+  belongs_to :account
 
   paginates_per 5
 
