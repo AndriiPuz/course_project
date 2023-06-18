@@ -1,13 +1,28 @@
-<h1>Admin Panel</h1>
-<h2>Users</h2>
-<ul>
-  <% @accounts.each do |user| %>
-    <li>
-      <%= user.email %>
-      
-    </li>
+<div class="container text-center" style="background: rgb(246, 243, 243); margin-top: 50px; border-radius: 10px">
+  <%= form_tag close_account_path, method: :delete do %>
+    <h1 class="mt-2">Admin Panel</h1>
+    <h2>Users</h2>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Account email</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @accounts.each do |account| %>
+          <tr>
+            <td><%= account.email %></td>
+            <td>
+              <%= button_to 'Close Account', close_account_path(account_id: account.id), method: :delete, data: { turbo_frame: '_top' }, class: "btn btn-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   <% end %>
-</ul>
+</div>
 
-<p>User deleted successfully.</p>
-<%= link_to 'Back to User List', accounts_home_path %>
+<div class="mt-2">
+  <%= paginate @accounts %>
+</div>

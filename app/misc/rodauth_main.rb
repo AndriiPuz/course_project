@@ -8,6 +8,10 @@ class RodauthMain < Rodauth::Rails::Auth
       :reset_password, :change_password, :change_password_notify,
       :change_login, :verify_login_change, :close_account
 
+      def can_delete_account?(account)
+        current_account.is_admin? # Перевірка, чи має поточний користувач роль "admin"
+      end
+
       before_create_account do
         # Validate presence of the name field
         throw_error_status(422, "name", "must be present") unless param_or_nil("name")
@@ -16,16 +20,15 @@ class RodauthMain < Rodauth::Rails::Auth
         # Create the associated profile record with name
         Profile.create!(account_id: account_id, name: param("name"))
       end
-      after_close_account do
+
+      after_close_account do |r|
         # Delete the associated profile record
-        Profile.find_by!(account_id: account_id).destroy
+        Profile.find_by!(account_id: r.account_id).destroy
       end
-
       
-
     # See the Rodauth documentation for the list of available config options:
     # http://rodauth.jeremyevans.net/documentation.html
-
+    close_account_requires_password? true
     # ==> General
     # Initialize Sequel and have it reuse Active Record's database connection.
     db Sequel.sqlite(extensions: :activerecord_connection, keep_reference: false)
@@ -62,6 +65,8 @@ class RodauthMain < Rodauth::Rails::Auth
     # Change some default param keys.
     login_param "email"
     # password_confirm_param "confirm_password"
+
+    
 
     # Redirect back to originally requested location after authentication.
     # login_return_to_requested_location? true
@@ -166,7 +171,7 @@ class RodauthMain < Rodauth::Rails::Auth
 
     # ==> Redirects
     # Redirect to home page after logout.
-    logout_redirect "/"
+    logout_redirect "/login"
 
     # Redirect to wherever login redirects to after account verification.
     verify_account_redirect { login_redirect }
@@ -185,6 +190,7 @@ class RodauthMain < Rodauth::Rails::Auth
     # verify_login_change_deadline_interval Hash[days: 2]
     # remember_deadline_interval Hash[days: 30]
     enable :otp
+    enable :close_account
 
     # don't show error message when redirected after login
     two_factor_need_authentication_error_flash { flash[:notice] == login_notice_flash ? nil : super() }

@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+  constraints -> (r) { !r.env["rodauth"].logged_in? } do
+    root 'rodauth#login'
+  end
+  delete "/close-account", to: "accounts#close_account", as: :close_account
   get 'accounts/home'
-  root 'rodauth#login'
-  # root "main#index"
+  get '/', to: 'main#index'
   get 'reports', to: 'reports#index'
   get 'reports_by_category', to: 'reports#report_by_category'
   get 'reports_by_dates', to: 'reports#report_by_dates'

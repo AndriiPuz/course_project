@@ -1,4 +1,5 @@
 <%= form_with url: rodauth.otp_disable_path, method: :post, data: { turbo: false } do |form| %>
+<div class="container px-4" style="background: rgb(246, 243, 243); margin-top: 15px; border-radius: 10px">
   <% if rodauth.two_factor_modifications_require_password? %>
     <div class="form-group mb-3">
       <%= form.label "password", rodauth.password_label, class: "form-label" %>
@@ -10,4 +11,5 @@
   <div class="form-group mb-3">
     <%= form.submit rodauth.otp_disable_button, class: "btn btn-warning" %>
   </div>
+</div>
 <% end %>
